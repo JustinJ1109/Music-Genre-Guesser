@@ -10,3 +10,5 @@ Run the following in terminal (will not work in CMD, try powershell):
     
     pip install -r requirements.txt
     
+
+** Also, be sure to add ".venv/" to .gitignore!!! **
