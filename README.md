@@ -12,4 +12,6 @@ Run the following in terminal (will not work in CMD, try powershell):
     pip install -r requirements.txt
     
 
-** Also, be sure to add ".venv/" to .gitignore!!! **
+** Also, be sure to add ".venv/" to .gitignore!!! **  
+  
+If you use VSCode, use Ctrl + Shift + P then type in 'Python: Select Interpreter' and set to the recommended env it suggests.
