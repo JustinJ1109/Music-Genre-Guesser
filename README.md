@@ -1,3 +1,6 @@
+# Music-Genre-Guesser
+This app will look at patterns in the spectrograms of songs categorized by genre. Then, given a brand new, unseen song, predict which genre it is. 
+
 # Completed Tasks
 \[Enter completed tasks here]
 
@@ -13,11 +16,7 @@ Define which tags to define images by
 Tag images  
 Define heuristics to use to assign image to song  
 Create program that assigns image to song  
-Add GUI functionality for this feature
-
-
-# Music-Genre-Guesser
-This app will look at patterns in the spectrograms of songs categorized by genre. Then, given a brand new, unseen song, predict which genre it is.  
+Add GUI functionality for this feature 
   
 Optional addition:  
   
