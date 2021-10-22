@@ -1,3 +1,5 @@
-body {
-    background-color: green;
-  }
+.title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 60pt;
+}
