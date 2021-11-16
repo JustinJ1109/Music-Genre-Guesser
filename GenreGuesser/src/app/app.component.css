@@ -2,4 +2,26 @@
     text-align: center;
     font-weight: bold;
     font-size: 60pt;
+    margin-bottom: 100px;
+    margin-top: 50px;
+}
+
+.dropzone {
+    margin-left: 50px;
+    margin-right: 50px;
+    height: 50%;
+    background-color: lightblue; 
+}
+
+
+.selectButton {
+    display: flex;
+    justify-content: center;
+    color: purple;
+    margin-top: 20px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
 }
