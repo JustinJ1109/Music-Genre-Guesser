@@ -9,6 +9,8 @@ SAMPLE_RATE = 22050
 TRACK_DURATION = 30 # measured in seconds
 SAMPLES_PER_TRACK = SAMPLE_RATE * TRACK_DURATION
 
+#
+
 # code sampled from https://github.com/musikalkemist/DeepLearningForAudioWithPython/blob/master/12-%20Music%20genre%20classification:%20Preparing%20the%20dataset/code/extract_data.py
 
 def save_mfcc(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_length=512, num_segments=5):
@@ -24,9 +26,10 @@ def save_mfcc(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_length=512, 
         # ensure we're processing a genre sub-folder level
         if dirpath is not dataset_path:
 
-            # save genre label (i.e., sub-folder name) in the mapping
+            # save genre label
             semantic_label = dirpath.split("/")[-1]
             if semantic_label not in [x[:-5] for x in os.listdir(json_path)]:
+
                 print("\nProcessing: {}".format(semantic_label))
 
                 # process all audio files in genre sub-dir
@@ -51,11 +54,17 @@ def save_mfcc(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_length=512, 
                         if len(mfcc) == num_mfcc_vectors_per_segment:
                             data.append(mfcc.tolist())
                             print("{}, segment:{}".format(file_path, d+1))
+                
+                json_dict_obj = {semantic_label : data}
+
 
         # save MFCCs to json file
                 with open(json_path + semantic_label + ".json", "w") as fp:
-                    json.dump(data, fp, indent=4)
+                    json.dump(json_dict_obj, fp, indent=4)
         
-        
+def crop_spectros(data_path):
+    return
+    
 if __name__ == "__main__":
     save_mfcc(DATASET_PATH, JSON_PATH, num_segments=10)
+
