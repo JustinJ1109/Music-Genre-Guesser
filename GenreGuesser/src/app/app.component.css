@@ -2,28 +2,85 @@
     text-align: center;
     font-weight: bold;
     font-size: 60pt;
-    margin-bottom: 100px;
     margin-top: 50px;
 }
 
 .dropzone {
-    margin-left: 50px;
-    margin-right: 85%;
-    margin-top: 200px;
-    height: 20%;
+    height: 100%;
     background-color: lightblue; 
 }
 
-
 .selectButton {
-    display: flex;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     justify-content: center;
     color: purple;
     margin-top: 20px;
-    margin-left: 125px;
+    width: 50%;
+    height: 8%;
+    align-items: center;
 }
 
 .center {
     display: flex;
     justify-content: center;
 }
+
+.guesses {
+    font-size: large;
+}
+
+.similar {
+    font-size: large;
+}
+
+.container .box { 
+    width: 95%; 
+    height: 400px;
+    margin:50px; 
+    display:table; 
+} 
+.container .box .box-row { 
+    display:table-row; 
+} 
+.container .box .box-cell { 
+    display:table-cell;  
+    padding:10px; 
+} 
+.container .box .box-cell.box1 { 
+    width: 25%;
+    text-align:justify; 
+} 
+.container .box .box-cell.box2 {
+    width: 75%;
+    background:lightgray; 
+    text-align:center;
+} 
+
+.outputContainer {
+    margin-top: 150px;
+}
+
+.outputContainer .box {
+    margin-top: 100px;
+    width: 95%; 
+    margin:50px; 
+    display:table;
+}
+
+.outputContainer .box .box-row { 
+    display:table-row; 
+} 
+.outputContainer .box .box-cell { 
+    display:table-cell;  
+    padding:10px; 
+} 
+
+.outputContainer .box .box-cell.outputBox1 { 
+    width: 75%;
+    text-align:justify; 
+} 
+.outputContainer .box .box-cell.outputBox2 {
+    width: 25%;
+} 
