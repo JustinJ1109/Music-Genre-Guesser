@@ -28,7 +28,9 @@
 }
 
 .guesses {
-    font-size: large;
+    font-size: 25px;
+    margin-left: 35%;
+    margin-top: 3%;
 }
 
 .similar {
@@ -59,28 +61,6 @@
 } 
 
 .outputContainer {
-    margin-top: 150px;
+    margin-top: 80px;
+    width: 100%;
 }
-
-.outputContainer .box {
-    margin-top: 100px;
-    width: 95%; 
-    margin:50px; 
-    display:table;
-}
-
-.outputContainer .box .box-row { 
-    display:table-row; 
-} 
-.outputContainer .box .box-cell { 
-    display:table-cell;  
-    padding:10px; 
-} 
-
-.outputContainer .box .box-cell.outputBox1 { 
-    width: 75%;
-    text-align:justify; 
-} 
-.outputContainer .box .box-cell.outputBox2 {
-    width: 25%;
-} 

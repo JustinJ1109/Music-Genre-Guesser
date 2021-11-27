@@ -10,6 +10,7 @@ export class AppComponent {
 
   title = 'GenreGuesser';
   files: File[] = [];
+  testOutput = 'test'
 
   constructor(private http: HttpClient) {}
 
@@ -24,5 +25,10 @@ export class AppComponent {
   }
 
 
+  onButtonClick() {
+    //send chosen file to backend, recieve ArrayList of top 5 genres with percentages
+    //also recieve image of spectrogram, load into box
+    this.testOutput = "test updated"
+  }
 }
 
