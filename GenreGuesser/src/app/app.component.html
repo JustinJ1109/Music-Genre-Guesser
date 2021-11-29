@@ -1,5 +1,5 @@
 <div class="title">
-	<b>Genre Guesser</b>
+	<b style="font-family: 'Times New Roman', Times, serif;">Genre Guesser</b>
 </div>
 
 
@@ -13,7 +13,7 @@
 						<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
 					</ngx-dropzone-preview>
 				</ngx-dropzone>
-				<button class="selectButton" (click)="getAllEmployees()">Choose File</button>
+				<button class="selectButton" (click)="testSendData()">Choose File</button>
 			</div>
 
 			<div class="box-cell box2">(Add spectrogram image here)</div>
@@ -23,7 +23,7 @@
 
 
 <div class="outputContainer">
-	<p style="text-decoration: underline; text-align: center; font-size: 40px;"><b>The genre of this song is most likely:</b></p>
+	<p style="text-decoration: underline; text-align: center; font-size: 40px; font-family: 'Times New Roman', Times, serif;"><b>The genre of this song is most likely:</b></p>
 	<div class="guesses">
 		<p style="margin-bottom: 2%;">1. {{testOutput}}</p>
 		<p style="margin-bottom: 2%;">2. </p>

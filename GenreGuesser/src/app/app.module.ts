@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { RestService } from './rest.service';
 
 
 
@@ -25,7 +26,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     MatIconModule,
     NgxDropzoneModule
   ],
-  providers: [],
+  providers: [RestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
