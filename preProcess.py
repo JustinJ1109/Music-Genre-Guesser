@@ -14,7 +14,7 @@ SAMPLES_PER_TRACK = SAMPLE_RATE * TRACK_DURATION
 # code sampled from https://github.com/musikalkemist/DeepLearningForAudioWithPython/blob/master/12-%20Music%20genre%20classification:%20Preparing%20the%20dataset/code/extract_data.py
 
 def save_mfcc(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_length=512, num_segments=5):
-    print([x[:-5] for x in os.listdir(json_path)])
+    #print([x[:-5] for x in os.listdir(json_path)])
 
     samples_per_segment = int(SAMPLES_PER_TRACK / num_segments)
     num_mfcc_vectors_per_segment = math.ceil(samples_per_segment / hop_length)
@@ -30,12 +30,12 @@ def save_mfcc(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_length=512, 
             semantic_label = dirpath.split("/")[-1]
             if semantic_label not in [x[:-5] for x in os.listdir(json_path)]:
 
-                print("\nProcessing: {}".format(semantic_label))
+                #print("\nProcessing: {}".format(semantic_label))
 
                 # process all audio files in genre sub-dir
                 for f in filenames:
 
-            # load audio file
+                    # load audio file
                     file_path = os.path.join(dirpath, f)
                     signal, sample_rate = librosa.load(file_path, sr=SAMPLE_RATE)
 
@@ -53,7 +53,7 @@ def save_mfcc(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_length=512, 
                         # store only mfcc feature with expected number of vectors
                         if len(mfcc) == num_mfcc_vectors_per_segment:
                             data.append(mfcc.tolist())
-                            print("{}, segment:{}".format(file_path, d+1))
+                            #print("{}, segment:{}".format(file_path, d+1))
                 
                 json_dict_obj = {semantic_label : data}
 

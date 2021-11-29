@@ -34,10 +34,11 @@ def prep_data(test_size, validation_size, data_path):
     X_valid = X_valid[..., np.newaxis]
     X_test = X_test[..., np.newaxis]
 
-    return X_train, X_valid, X_test, Y_train, Y_valid, Y_test
+    return X_train, Y_train, X_test, Y_test, X_valid, Y_valid
     
 def predict(model, x_data, y_data):
     # requires 4d array (1, 130, 13, 1)
+    y_data = None
     x_data = x_data[np.newaxis, ...]
     prediction = model.predict(x_data)
     pred_index = np.argmax(prediction, axis=1)

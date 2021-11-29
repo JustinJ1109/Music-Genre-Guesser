@@ -1,42 +1,44 @@
-
-#Separate file (runPredictions.py) from here on out:
 from flask.helpers import send_file
 import librosa
 from flask import Flask, render_template, request
 from flask_restful import Resource, Api
-from werkzeug import secure_filename
+import werkzeug
 import train_model as tm
 import matplotlib.pyplot as plt
 import keras
+import tensorflow
 from scipy.io import wavfile
 import numpy as np
 import os
 
 DATA_PATH = "preProcessedData/"
-model = tm.train_model(tm.load_data(DATA_PATH))
+X_train, Y_train, X_test, Y_test, X_valid, Y_valid = tm.prep_data(.2, .2, DATA_PATH)
+model = tm.train_model((X_train.shape[1], X_train.shape[2]))
+print(str(model))
 
-app = Flask(__name__)
-api = Api(app)
+#app = Flask(__name__)
+#api = Api(app)
 
-class Predictions(Resource):
-    def get(self):
-        return {'predictions': [{'id':1, 'name':'Balram'},{'id':2, 'name':'Tom'}]} 
+#class Predictions(Resource):
+    #def get(self):
+        #return {'predictions': [{'id':1, 'name':'Balram'},{'id':2, 'name':'Tom'}]} 
 
-api.add_resource(Predictions, '/predictions')
+#api.add_resource(Predictions, '/predictions')
 
-if __name__ == '__main__':
-    app.run(port=5002)
+#if __name__ == '__main__':
+    #app.run(port=5002)
 
-while (True):
+for i in range(1):
     #Gets file from angular front end.
-    app = Flask(__name__)
-    @app.route('/uploader', methods = ['GET', 'POST'])
-    def upload_file():
-        if request.method == 'POST':
-            f = request.files['file']
-            f.save(secure_filename(f.filename))
-            return f
-    f = upload_file()
+    #app = Flask(__name__)
+    #@app.route('/uploader', methods = ['GET', 'POST'])
+    #def upload_file():
+        #if request.method == 'POST':
+            #f = request.files['file']
+            #f.save(secure_filename(f.filename))
+            #return f
+    #f = upload_file()
+    f = open("test.wav", "wr")
     
     #Trims the file down to 30 seconds.
     sampleRate, waveData = wavfile.read(f)
@@ -54,10 +56,10 @@ while (True):
     fig.savefig("output.png")
     output = open("output.png", "r")
 
-    @app.route("/")
-    def predOut(output):
-        print (output)
-        return send_file("(Path_To_Angular)")
+    #@app.route("/")
+    #def predOut(output):
+        #print (output)
+        #return send_file("(Path_To_Angular)")
         
     for i in range(10):
         #Grabs a 3 second sample from the 30 second sample
@@ -84,9 +86,10 @@ while (True):
         mfcc = librosa.feature.mfcc(signal[startSample:endSample], sample_rate)
         mfcc = mfcc.T
         
-        prediction = predict(model, )
+        prediction = tm.predict(model, mfcc, "")
+        print(prediction)
 
-        @app.route("/")
-        def predOut(prediction):
-            print (prediction)
-            return send_file("(Path_To_Angular)")
+        #@app.route("/")
+        #def predOut(prediction):
+            #print (prediction)
+            #return send_file("(Path_To_Angular)")
