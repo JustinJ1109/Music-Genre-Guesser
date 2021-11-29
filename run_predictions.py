@@ -42,10 +42,10 @@ while (True):
     sampleRate, waveData = wavfile.read(f)
     startSample = int(0)
     endSample = int(30 * sampleRate)
-    wavfile.write(".wav", sampleRate, waveData[startSample:endSample])
+    wavfile.write("out.wav", sampleRate, waveData[startSample:endSample])
 
     #Converts file to spectrogram.
-    sampleRate, waveData = wavfile.read(f)
+    sampleRate, waveData = wavfile.read("out.wav")
     x, sr = librosa.load(snippet.path())
     X = librosa.stft(x)
     Xdb = librosa.amplitude_to_db(abs(X))
@@ -58,14 +58,10 @@ while (True):
     def predOut(output):
         print (output)
         return send_file("(Path_To_Angular)")
-    
-    predictions = {}
-    for x in os.listdir(DATA_PATH):
-        predictions.update({x[:-5] : 0})
         
     for i in range(10):
         #Grabs a 3 second sample from the 30 second sample
-        sampleRate, waveData = wavfile.read(f)
+        sampleRate, waveData = wavfile.read("output.png")
         startSample = int(3 * i * sampleRate)
         endSample = int(3 * (i+1) * sampleRate)
         wavfile.write("snippet.wav", sampleRate, waveData[startSample:endSample])
@@ -94,7 +90,3 @@ while (True):
         def predOut(prediction):
             print (prediction)
             return send_file("(Path_To_Angular)")
-
-                
-        # add snippet to list of predictions
-        predictions[prediction] += 1
