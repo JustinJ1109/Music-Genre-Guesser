@@ -24,6 +24,7 @@ export class AppComponent {
   prediction10: JSON
   spectrogramImage: JSON;
   predictions: JSON;
+  employeeData: JSON;
 
   constructor(private http: HttpClient) {}
 
@@ -35,6 +36,14 @@ export class AppComponent {
   onRemove(event: any) {
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  getAllEmployees() {
+    this.http.get('http://127.0.0.1:5002/employees').subscribe(data => {
+      this.employeeData = data as JSON;
+      console.log(this.employeeData + " test");
+    })
+    console.log(this.employeeData + " test");
   }
 
   onButtonClick() {
