@@ -4,13 +4,11 @@ from flask.helpers import send_file
 import librosa
 from flask import Flask, render_template, request
 from flask_restful import Resource, Api
+from numba.core.target_extension import current_target
 from werkzeug import secure_filename
 import train_model as tm
 import matplotlib.pyplot as plt
-import keras
 from scipy.io import wavfile
-import numpy as np
-import os
 
 DATA_PATH = "preProcessedData/"
 model = tm.train_model(tm.load_data(DATA_PATH))
@@ -30,6 +28,7 @@ if __name__ == '__main__':
 while (True):
     #Gets file from angular front end.
     app = Flask(__name__)
+
     @app.route('/uploader', methods = ['GET', 'POST'])
     def upload_file():
         if request.method == 'POST':
@@ -37,7 +36,7 @@ while (True):
             f.save(secure_filename(f.filename))
             return f
     f = upload_file()
-    
+
     #Trims the file down to 30 seconds.
     sampleRate, waveData = wavfile.read(f)
     startSample = int(0)
@@ -59,6 +58,12 @@ while (True):
         print (output)
         return send_file("(Path_To_Angular)")
         
+    snippet_predictions = {
+        "blues" : 0, "classical" : 0, "country" : 0, 
+        "disco" : 0, "hiphop" : 0, "jazz" : 0, 
+        "metal" : 0, "pop" : 0, "reggae" : 0, "rock" : 0}
+
+
     for i in range(10):
         #Grabs a 3 second sample from the 30 second sample
         sampleRate, waveData = wavfile.read("output.png")
@@ -78,15 +83,24 @@ while (True):
         
         #Converts spectrogram to mfcc
         snippetPic = open("snippet.png", "wr")
-        
         signal, sample_rate = librosa.load(snippet, sr=sampleRate)
-        
         mfcc = librosa.feature.mfcc(signal[startSample:endSample], sample_rate)
         mfcc = mfcc.T
-        
-        prediction = predict(model, )
+
+        snippet_predictions[tm.predict(model, mfcc)] += 1
+
+        curr_max_key = ""
+        curr_max = 0
+        for k, v in snippet_predictions.items():
+            if v > curr_max:
+                curr_max = v
+                curr_max_key = k
+
+        prediction = curr_max_key
 
         @app.route("/")
         def predOut(prediction):
             print (prediction)
             return send_file("(Path_To_Angular)")
+
+
