@@ -1,7 +1,9 @@
 
 #Separate file (runPredictions.py) from here on out:
+from flask.helpers import send_file
 import librosa
 from flask import Flask, render_template, request
+from flask_restful import Resource, Api
 from werkzeug import secure_filename
 import train_model as tm
 import matplotlib.pyplot as plt
@@ -12,6 +14,18 @@ import os
 
 DATA_PATH = "preProcessedData/"
 model = tm.train_model(tm.load_data(DATA_PATH))
+
+app = Flask(__name__)
+api = Api(app)
+
+class Predictions(Resource):
+    def get(self):
+        return {'predictions': [{'id':1, 'name':'Balram'},{'id':2, 'name':'Tom'}]} 
+
+api.add_resource(Predictions, '/predictions')
+
+if __name__ == '__main__':
+    app.run(port=5002)
 
 while (True):
     #Gets file from angular front end.
@@ -29,6 +43,21 @@ while (True):
     startSample = int(0)
     endSample = int(30 * sampleRate)
     wavfile.write(".wav", sampleRate, waveData[startSample:endSample])
+
+    #Converts file to spectrogram.
+    sampleRate, waveData = wavfile.read(f)
+    x, sr = librosa.load(snippet.path())
+    X = librosa.stft(x)
+    Xdb = librosa.amplitude_to_db(abs(X))
+    fig = plt.figure(figsize=(14, 5), dpi=100) #FIXME: figsize and dpi is definitely wrong
+    librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='hz')
+    fig.savefig("output.png")
+    output = open("output.png", "r")
+
+    @app.route("/")
+    def predOut(output):
+        print (output)
+        return send_file("(Path_To_Angular)")
     
     predictions = {}
     for x in os.listdir(DATA_PATH):
@@ -65,6 +94,7 @@ while (True):
         def predOut(prediction):
             print (prediction)
             return send_file("(Path_To_Angular)")
+
                 
         # add snippet to list of predictions
         predictions[prediction] += 1
