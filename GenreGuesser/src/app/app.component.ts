@@ -113,27 +113,11 @@ export class AppComponent implements OnInit{
     this.rs.sendImage(this.files[0]);
 
     let audio = new Audio();
-    audio.src = "../../../assets/StarWars3.wav";
+    audio.src = "../../../assets/IMG_6191.wav";
     audio.load();
     audio.play();
     
 
-    
-    
-
-    //send chosen file to backend, recieve ArrayList of top 5 genres with percentages
-    //also recieve image of spectrogram, load into box
-    //this.testOutput = "test updated"
-
-    //this.http.get('http://127.0.0.1:5002/spectrogram').subscribe(data => {
-    //  this.spectrogramImage = data as JSON;
-    //  console.log("image test " + this.spectrogramImage);
-    //})
-
-    //this.http.get('http://127.0.0.1:5002/predictions').subscribe(data => {
-    //  this.predictions = data as JSON;
-    //  console.log(this.predictions);
-    //})
   }
 }
 
