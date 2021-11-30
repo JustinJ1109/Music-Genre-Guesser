@@ -21,14 +21,26 @@ def load_data(data_path):
         print("loading {}".format(f))
         with open(data_path + f) as jFile:
             data.update(json.load(jFile))
-
+    # FIXME: not structured properly
     print("Loaded!")
-    return data.values(), data.keys()
+    
+    x = []
+    y = []
+    for k, v in data.items():
+        x.append(v)
+        y.append(k)
+    x = np.array(x)
+    y = np.array(y)
+
+    return x, y
 
 ###
 def prep_data(test_size, validation_size, data_path):
     print("Prepping...")
     x, y = load_data(data_path)
+
+
+
     
     # create train/validation/test data split
     print("Splitting test data")
@@ -36,6 +48,7 @@ def prep_data(test_size, validation_size, data_path):
     print("Split data successfully. Split again...")
     X_train, X_valid, Y_train, Y_valid = train_test_split(X_train, Y_train, test_size=validation_size)
     
+
     print("making new axes")
     X_train = X_train[..., np.newaxis]
     X_valid = X_valid[..., np.newaxis]

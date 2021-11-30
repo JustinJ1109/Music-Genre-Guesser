@@ -40,7 +40,7 @@ def save_mfcc(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_length=512, 
                     signal, sample_rate = librosa.load(file_path, sr=SAMPLE_RATE)
 
                     # process all segments of audio file
-                    for d in range(num_segments):
+                    for d in range(num_segments): # 10 segments
 
                         # calculate start and finish sample for current segment
                         start = samples_per_segment * d
@@ -52,7 +52,7 @@ def save_mfcc(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_length=512, 
 
                         # store only mfcc feature with expected number of vectors
                         if len(mfcc) == num_mfcc_vectors_per_segment:
-                            data.append(mfcc.tolist())
+                            data.append(sum(mfcc.tolist(), []))
                             print("{}, segment:{}".format(file_path, d+1))
                 
                 json_dict_obj = {semantic_label : data}
