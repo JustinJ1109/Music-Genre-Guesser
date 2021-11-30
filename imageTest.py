@@ -11,28 +11,16 @@ CORS(app)
 weather = {
     "data": [
     {
-        "genre1": "1/6/2019",
-        "temperature": "23",
-        "windspeed": "16",
-        "event": "Sunny"
+        "genre1": "Country",
+        "percentage1": "50"  
     },
     {
-        "day": "2/6/2019",
-        "temperature": "21",
-        "windspeed": "18",
-        "event": "Rainy"
+        "genre2": "Pop",
+        "percentage2": "30"
     },
     {
-        "day": "3/6/2019",
-        "temperature": "31",
-        "windspeed": "12",
-        "event": "Sunny"
-    },
-    {
-        "day": "4/6/2019",
-        "temperature": "5",
-        "windspeed": "28",
-        "event": "Snow"
+        "genre3": "Rock",
+        "percentage3": "20"
     }
     ]
 }
