@@ -56,11 +56,10 @@
 } 
 .container .box .box-cell.box2 {
     width: 75%;
-    background:lightgray; 
     text-align:center;
 } 
 
 .outputContainer {
-    margin-top: 80px;
+    margin-top: 30px;
     width: 100%;
 }

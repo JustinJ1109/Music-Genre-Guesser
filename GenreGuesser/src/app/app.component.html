@@ -8,15 +8,17 @@
 		<div class="box-row">
 			<div class="box-cell box1">
 				<ngx-dropzone class="dropzone" (change)="onSelect($event)">
-					<ngx-dropzone-label>Drop audio file here!</ngx-dropzone-label>
+					<ngx-dropzone-label>Drop .wav file here!</ngx-dropzone-label>
 					<ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
 						<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
 					</ngx-dropzone-preview>
 				</ngx-dropzone>
-				<button class="selectButton" (click)="testSendData()">Choose File</button>
+				<button class="selectButton" (click)="onButtonClick()">Choose File</button>
 			</div>
 
-			<div class="box-cell box2">(Add spectrogram image here)</div>
+			<div class="box-cell box2">
+				<img src="/assets/musicImage.png" style="width: 90%; height: 40%;" alt="image">
+			</div>
 		</div>
 	</div>
 </div>
