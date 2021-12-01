@@ -41,7 +41,7 @@ def prep_data(test_size, data_path):
     return X_train, X_test, Y_train, Y_test
 
 ###
-def train_model(input_shape, trainX, trainY, testX, testY):
+def train_model(input_shape):
     print("Training...")
     
     #Defines the model.
@@ -64,8 +64,6 @@ def train_model(input_shape, trainX, trainY, testX, testY):
     #Compiles the model
     model.compile(optimizer=opt, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    model.fit(trainX, trainY, epochs=5000, batch_size=100, validation_data=(testX, testY))
-
     return model
 
 def predict(model, x_data, y_data=None):
@@ -86,6 +84,8 @@ if __name__ == "__main__":
 
     # create network
     input_shape = (X_train.shape[1], X_train.shape[2])
-    model = train_model(input_shape, X_train, y_train, X_test, y_test)
+    model = train_model(input_shape)
+
+    model.fit(X_train, y_train, epochs=5000, batch_size=100, validation_data=(X_test, y_test))
 
     model.save_weights("models/model25612864epoch5000batch100")
