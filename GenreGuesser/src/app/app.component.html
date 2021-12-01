@@ -2,33 +2,25 @@
 	<b style="font-family: inherit;">Genre Guesser</b>
 </div>
 
-
 <div class="container">
-	<div class="box">
-		<div class="box-row">
-			<div class="box-cell box1">
-				<ngx-dropzone class="dropzone" (change)="onSelect($event)">
-					<ngx-dropzone-label>Drop .wav file here!</ngx-dropzone-label>
-					<ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-						<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-					</ngx-dropzone-preview>
-				</ngx-dropzone>
-				<button class="selectButton" (click)="onButtonClick()"><b>Choose File</b></button>
-			</div>
+	<img src="/assets/Genres_can_be_.png" class="image" alt="image">
+</div>
 
-			<div class="box-cell box2">
-				<img src="/assets/Genres_can_be_.png" style="width: 90%; height: 40%;" alt="image">
-			</div>
-		</div>
-	</div>
+<div class="inputForm">
+<form (ngSubmite)="onSubmit()" action="http://127.0.0.1:5000" method="post" enctype="multipart/form-data">
+	<input style="margin-left: 43%;" type="file" name="file" />
+	<input type="submit" value="Upload">
+</form>
 </div>
 
 
 <div class="outputContainer">
-	<p style="text-decoration: underline; text-align: center; font-size: 40px; font-family: 'Times New Roman', Times, serif;"><b>The genre of this song is most likely:</b></p>
+	<p
+		style="text-decoration: underline; text-align: center; font-size: 40px; font-family: 'Times New Roman', Times, serif;">
+		<b>The genre of this song is most likely:</b></p>
 	<div class="guesses">
 		<p style="margin-bottom: 2%;">1. {{prediction1}}: {{percentage1}}% </p>
-		<p style="margin-bottom: 2%;">2. {{prediction2}}: {{percentage2}}%  </p>
-		<p style="margin-bottom: 2%;">3. {{prediction3}}: {{percentage3}}%  </p>
+		<p style="margin-bottom: 2%;">2. {{prediction2}}: {{percentage2}}% </p>
+		<p style="margin-bottom: 2%;">3. {{prediction3}}: {{percentage3}}% </p>
 	</div>
 </div>

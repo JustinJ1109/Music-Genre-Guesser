@@ -29,7 +29,7 @@
 
 .guesses {
     font-size: 25px;
-    margin-left: 35%;
+    margin-left: 45%;
     margin-top: 3%;
 }
 
@@ -37,30 +37,26 @@
     font-size: large;
 }
 
-.container .box { 
-    width: 95%; 
+.image {
+    width: 80%;
+    height: 100%;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.inputForm {
+    margin-top: 100px;
+}
+
+.container {
     height: 400px;
-    margin:50px; 
-    display:table; 
-} 
-.container .box .box-row { 
-    display:table-row; 
-} 
-.container .box .box-cell { 
-    display:table-cell;  
-    padding:10px; 
-} 
-.container .box .box-cell.box1 { 
-    width: 25%;
-    text-align:justify; 
-} 
-.container .box .box-cell.box2 {
-    width: 75%;
-    text-align:center;
-} 
+    width: 100%;
+}
 
 .outputContainer {
-    margin-top: -250px;
-    width: 80%;
-    margin-left: 400px;
+    margin-top: 100px;
+    width: 100%;
 }
+
