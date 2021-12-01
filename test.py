@@ -14,7 +14,14 @@ D_PATH = 'preProcessedData/mfcc_data.json'
 X_train, X_test, y_train, y_test = tm.prep_data(0.25, D_PATH)
 input_shape = (X_train.shape[1], X_train.shape[2])
 
-model = tm.train_model(input_shape)
+model = keras.Sequential()
+model.add(keras.layers.Flatten(input_shape=input_shape))
+model.add(keras.layers.Dense(256, activation='relu'))
+model.add(keras.layers.Dense(128, activation='relu'))
+model.add(keras.layers.Dense(64, activation='relu'))
+model.add(keras.layers.Dense(10, activation='softmax'))
+opt = keras.optimizers.Adam(learning_rate=0.0001)
+model.compile(optimizer=opt, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 model.load_weights("models/model25612864epoch5000batch100")
 
