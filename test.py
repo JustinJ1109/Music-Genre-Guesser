@@ -1,8 +1,10 @@
+from keras.saving.save import load_model
 import librosa
 from scipy.io import wavfile
-from tensorflow.python.keras.backend import switch
+from tensorflow.python.keras.backend import log, switch
 import train_model as tm
 import tensorflow.keras as keras
+from keras.models import load_model
 import numpy as np
 import math
 
@@ -10,21 +12,9 @@ SAMPLE_RATE = 22050
 TRACK_DURATION = 30 # measured in seconds
 SAMPLES_PER_TRACK = SAMPLE_RATE * TRACK_DURATION
 
-#Grabs the model.
-D_PATH = 'preProcessedData/mfcc_data.json'
-X_train, X_test, y_train, y_test = tm.prep_data(0.25, D_PATH)
-input_shape = (X_train.shape[1], X_train.shape[2])
+MODEL_PATH = "saved_models/model-25612864e200b100ln3"
 
-model = keras.Sequential()
-model.add(keras.layers.Flatten(input_shape=input_shape))
-model.add(keras.layers.Dense(256, activation='relu'))
-model.add(keras.layers.Dense(128, activation='relu'))
-model.add(keras.layers.Dense(64, activation='relu'))
-model.add(keras.layers.Dense(10, activation='softmax'))
-opt = keras.optimizers.Adam(learning_rate=0.0001)
-model.compile(optimizer=opt, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-
-model.load_weights("models/model25612864epoch5000batch100")
+model = load_model(MODEL_PATH)
 
 snippet_predictions = [0 for i in range(10)]
 

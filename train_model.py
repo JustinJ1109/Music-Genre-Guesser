@@ -13,7 +13,6 @@ from tensorflow.python.keras.backend import dropout
 #https://pythonbasics.org/flask-upload-file/
 #used as a basis for code.
 
-
 data = {}
 
 #train_model.py
@@ -30,7 +29,6 @@ def load_data(data_path):
 
     return inputs, targets
 
-
 ###
 def prep_data(test_size, data_path):
     print("Prepping...")
@@ -39,20 +37,15 @@ def prep_data(test_size, data_path):
     # create train/validation/test data split
     print("Splitting test data")
     X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size=test_size)
-    
-
     return X_train, X_test, Y_train, Y_test
 
 ###
 def train_model(input_shape, trainX, trainY, testX, testY, epochs=100, batch_size=32, layer_sizes=[512, 256, 64], dropout_rate=0.3):
     print("Training...")
-    
-
     #Defines the model.
     model = keras.Sequential()
 
     model.add(keras.layers.Flatten(input_shape=input_shape))
-
     for i in range(len(layer_sizes)):
         model.add(keras.layers.Dense(layer_sizes[i], activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)))
         model.add(keras.layers.Dropout(dropout_rate))
@@ -63,15 +56,11 @@ def train_model(input_shape, trainX, trainY, testX, testY, epochs=100, batch_siz
 
     #Defines Optimizer
     opt = keras.optimizers.Adam(learning_rate=0.0001)
-
     #Compiles the model
     model.compile(optimizer=opt, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-
     model.fit(trainX, trainY, epochs=epochs, batch_size=batch_size, validation_data=(testX, testY))
 
     return model
-
-
 
 def predict(model, x_data, y_data=None):
     print("Predicting...")
@@ -86,17 +75,26 @@ def predict(model, x_data, y_data=None):
 D_PATH = 'preProcessedData/mfcc_data.json'
 if __name__ == "__main__":
 
+
+    MODEL_SAVE_PATH = "saved_models/"
+
+    test_size = 0.25
+
     # get train, validation, test splits
-    X_train, X_test, y_train, y_test = prep_data(0.3, D_PATH)
+    X_train, X_test, y_train, y_test = prep_data(test_size, D_PATH)
 
     # create network
     input_shape = (X_train.shape[1], X_train.shape[2])
 
-    epochs = 100
-    batch_size = 40
-    layer_sizes = [512, 256, 128]
+    #model25612864epoch5000batch100
+    epochs = 200
+    batch_size = 32
+    layer_sizes = [256, 128, 64]
+    dropout_rate = 0.3
 
-    model = train_model(input_shape, X_train, y_train, X_test, y_test, epochs=epochs, batch_size=batch_size, layer_sizes=layer_sizes)
+    model = train_model(input_shape, X_train, y_train, X_test, y_test, epochs=epochs, batch_size=batch_size, layer_sizes=layer_sizes, dropout_rate=dropout_rate)
 
-    model.save_weights("models/model" + str(layer_sizes[0]) + str(layer_sizes[1]) + str(layer_sizes[2]) + "epoch" + str(epochs) + "batch" + str(batch_size))
-
+    layer_sizes_string = ""
+    for i in range(len(layer_sizes)):
+        layer_sizes_string += str(layer_sizes[i])
+    model.save(MODEL_SAVE_PATH + "model-" + layer_sizes_string + "e" + str(epochs) + "b" + str(batch_size) + "ln" + str(len(layer_sizes)) + "t" + str(test_size * 100))
