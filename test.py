@@ -1,5 +1,6 @@
 import librosa
 from scipy.io import wavfile
+from tensorflow.python.keras.backend import switch
 import train_model as tm
 import tensorflow.keras as keras
 import numpy as np
@@ -37,8 +38,6 @@ if (math.floor(librosa.get_duration(filename='test.wav')) > 30):
     endSample = int(30 * sampleRate)
     wavfile.write("test.wav", sampleRate, waveData[startSample:endSample])
 
-topThree = [0 for i in range(3)]
-
 for i in range(10):
     #Grabs a 3 second sample from the 30 second sample
     sampleRate, waveData = wavfile.read("test.wav")
@@ -55,3 +54,36 @@ for i in range(10):
     snippet_predictions[np.argmax(prediction, axis=1)[0]] += 1
 
 print(snippet_predictions)
+topThree = [0 for i in range(3)]
+topThreePercent = [0 for i in range(3)]
+
+for i in range(3):
+    max_value = max(snippet_predictions)
+    topThreePercent[i] = max_value * 10
+    for j in range(10):
+        if (snippet_predictions[j] == max_value):
+            if (j == 0):
+                topThree[i] = "Blues"
+            elif (j == 1):
+                topThree[i] = "Classical"
+            elif (j == 2):
+                topThree[i] = "Country"
+            elif (j == 3):
+                topThree[i] = "Disco"
+            elif (j == 4):
+                topThree[i] = "Hip Hop"
+            elif (j == 5):
+                topThree[i] = "Jazz"
+            elif (j == 6):
+                topThree[i] = "Metal"
+            elif (j == 7):
+                topThree[i] = "Pop"
+            elif (j == 8):
+                topThree[i] = "Reggae"
+            elif (j == 9):
+                topThree[i] = "Rock"
+            snippet_predictions[j] = -1
+            break
+
+print(topThree)
+print(topThreePercent)
