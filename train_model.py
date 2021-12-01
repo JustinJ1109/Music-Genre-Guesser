@@ -41,7 +41,7 @@ def prep_data(test_size, data_path):
     return X_train, X_test, Y_train, Y_test
 
 ###
-def train_model(input_shape):
+def train_model(input_shape, trainX, trainY, testX, testY):
     print("Training...")
     
     #Defines the model.
@@ -49,33 +49,22 @@ def train_model(input_shape):
 
     model.add(keras.layers.Flatten(input_shape=input_shape))
 
-    # layer 1
-    model.add(keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=input_shape))
-    model.add(keras.layers.MaxPooling2D((3, 3), strides=(2, 2), padding='same')) 
-    model.add(keras.layers.BatchNormalization())
-    print("Layer 1 added")
-    
-    # layer 2
-    model.add(keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=input_shape))
-    model.add(keras.layers.MaxPooling2D((3, 3), strides=(2, 2), padding='same')) 
-    model.add(keras.layers.BatchNormalization())
-    print("Layer 2 added")
-
-    # layer 3
-    model.add(keras.layers.Conv2D(32, (2, 2), activation='relu', input_shape=input_shape))
-    model.add(keras.layers.MaxPooling2D((2, 2), strides=(2, 2), padding='same'))
-    model.add(keras.layers.BatchNormalization())
-    print("Layer 3 added")
-
-    # flatten out and feed to dense
-    model.add(keras.layers.Flatten())
+    # Dense training Layers
+    model.add(keras.layers.Dense(256, activation='relu'))
+    model.add(keras.layers.Dense(128, activation='relu'))
     model.add(keras.layers.Dense(64, activation='relu'))
-    model.add(keras.layers.Dropout(0.3))
-    print("Layers flattened")
 
     # out layer
     model.add(keras.layers.Dense(10, activation='softmax'))
     print("Output layer added!")
+
+    #Defines Optimizer
+    opt = keras.optimizers.Adam(learning_rate=0.0001)
+
+    #Compiles the model
+    model.compile(optimizer=opt, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+    model.fit(trainX, trainY, epochs=3000, batch_size=100, validation_data=(testX, testY))
 
     return model
 
@@ -88,3 +77,15 @@ def predict(model, x_data, y_data=None):
 
     print("Target: {}, Predicted Label: {}".format(y_data, pred_index))
     return prediction
+
+D_PATH = 'preProcessedData/mfcc_data.json'
+if __name__ == "__main__":
+
+    # get train, validation, test splits
+    X_train, X_test, y_train, y_test = prep_data(0.25, D_PATH)
+
+    # create network
+    input_shape = (X_train.shape[1], X_train.shape[2])
+    model = train_model(input_shape, X_train, y_train, X_test, y_test)
+
+    model.save_weights("models/model25612864epoch3000batch100")

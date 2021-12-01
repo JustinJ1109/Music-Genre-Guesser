@@ -3,18 +3,6 @@ from scipy.io import wavfile
 import train_model as tm
 import numpy
 
-
-D_PATH = 'preProcessedData/mfcc_data.json'
-if __name__ == "__main__":
-
-    # get train, validation, test splits
-    X_train, X_test, y_train, y_test = tm.prep_data(0.25, D_PATH)
-
-    # create network
-    input_shape = (X_train.shape[1], X_train.shape[2])
-    model = tm.train_model(input_shape)
-
-
 snippet_predictions = {
         "blues" : 0, "classical" : 0, "country" : 0, 
         "disco" : 0, "hiphop" : 0, "jazz" : 0, 
