@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from './rest.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,6 @@ export class AppComponent implements OnInit{
   employeeData: JSON;
 
   responseString: String;
-  responseRegex: "\"genre[0-9]\": .[^\s,]+";
-  updatedResponseString: any;
 
   prediction1: String;
   prediction2: String;
@@ -29,6 +28,8 @@ export class AppComponent implements OnInit{
   percentage2: String;
   percentage3: String;
 
+  submitted: boolean = false
+
 
   constructor(private rs : RestService) {}
 
@@ -36,7 +37,7 @@ export class AppComponent implements OnInit{
   weather: Array<string>;
 
   ngOnInit() {
-    this.rs.readWeather()
+    this.rs.readData()
       .subscribe
         (
           (response:any) => 
@@ -105,17 +106,18 @@ export class AppComponent implements OnInit{
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-
+  onSubmit() {
+    this.submitted = true;
+ }
 
 
   onButtonClick() {
-
+    console.log(this.files[0]);
     this.rs.sendImage(this.files[0]);
-
-    let audio = new Audio();
-    audio.src = "../../../assets/IMG_6191.wav";
-    audio.load();
-    audio.play();
+    //let audio = new Audio();
+    //audio.src = this.files[0];
+    //audio.load();
+    //audio.play();
     
 
   }
