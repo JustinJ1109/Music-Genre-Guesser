@@ -16,63 +16,38 @@ data = {}
 #train_model.py
 def load_data(data_path):
     print("Loading data...")
-#loads the data from JSON back into dictionary
-    for f in os.listdir(data_path):
-        print("loading {}".format(f))
-        with open(data_path + f) as jFile:
-            data.update(json.load(jFile))
-    # FIXME: not structured properly
-    print("Loaded!")
+    #loads the data from JSON back into dictionary
     
-    x = []
-    y = []
-    for k, v in data.items():
-        x.append(v)
-        y.append(k)
-    x = np.array(x)
-    y = np.array(y)
+    with open(data_path) as f:
+        data = json.load(f)
 
-    return x, y
+    #convert lsits to numpy arr
+    inputs = np.array(data["mfcc"])
+    targets = np.array(data["labels"])
+
+    return inputs, targets
+
 
 ###
-def prep_data(test_size, validation_size, data_path):
+def prep_data(test_size, data_path):
     print("Prepping...")
     x, y = load_data(data_path)
 
-
-
-    
     # create train/validation/test data split
     print("Splitting test data")
     X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size=test_size)
-    print("Split data successfully. Split again...")
-    X_train, X_valid, Y_train, Y_valid = train_test_split(X_train, Y_train, test_size=validation_size)
     
 
-    print("making new axes")
-    X_train = X_train[..., np.newaxis]
-    X_valid = X_valid[..., np.newaxis]
-    X_test = X_test[..., np.newaxis]
-
-    return X_train, X_valid, X_test, Y_train, Y_valid, Y_test
+    return X_train, X_test, Y_train, Y_test
 
 ###
 def train_model(input_shape):
     print("Training...")
-    #Restructures trainX and trainY.
-    # trainX = trainX.reshape((trainX.shape[0], 432, 288, 1)) #FIXME: Dimensions
-    # testX = testX.reshape((testX.shape[0], 432, 288, 1)) #FIXME: Dimensions
-    # trainY = keras.to_categorical(trainY)
-    # testY= keras.to_categorical(testY)
-
-    #Changes trainer from int to float within range 0-255.
-    # train_norm = keras.train.astype('float32')
-    # train_norm /= 255.0
-    # test_norm = keras.train.astype('float32')
-    # test_norm /= 255.0
-
+    
     #Defines the model.
     model = keras.Sequential()
+
+    model.add(keras.layers.Flatten(input_shape=input_shape))
 
     # layer 1
     model.add(keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=input_shape))
@@ -101,7 +76,6 @@ def train_model(input_shape):
     # out layer
     model.add(keras.layers.Dense(10, activation='softmax'))
     print("Output layer added!")
-
 
     return model
 

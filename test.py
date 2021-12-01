@@ -4,14 +4,14 @@ import train_model as tm
 import numpy
 
 
-D_PATH = 'preProcessedData/'
+D_PATH = 'preProcessedData/mfcc_data.json'
 if __name__ == "__main__":
 
     # get train, validation, test splits
-    X_train, X_validation, X_test, y_train, y_validation, y_test = tm.prep_data(0.25, 0.2, D_PATH)
+    X_train, X_test, y_train, y_test = tm.prep_data(0.25, D_PATH)
 
     # create network
-    input_shape = (X_train.shape[1], X_train.shape[2], 1)
+    input_shape = (X_train.shape[1], X_train.shape[2])
     model = tm.train_model(input_shape)
 
 
