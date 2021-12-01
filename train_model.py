@@ -53,7 +53,7 @@ def train_model(input_shape, trainX, trainY, testX, testY, epochs=100, batch_siz
 
     model.add(keras.layers.Flatten(input_shape=input_shape))
 
-    for i in range(layer_sizes):
+    for i in range(len(layer_sizes)):
         model.add(keras.layers.Dense(layer_sizes[i], activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)))
         model.add(keras.layers.Dropout(dropout_rate))
 
