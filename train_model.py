@@ -4,6 +4,9 @@ from sklearn.model_selection import train_test_split
 import tensorflow.keras as keras
 import os
 
+from tensorflow.keras import layers
+from tensorflow.python.keras.backend import dropout
+
 #https://mybb.gvsu.edu/bbcswebdav/pid-9247138-dt-content-rid-78592561_1/courses/GVCIS365.01.202210/neuralNetworksPythonKeras.pdf and
 #https://github.com/musikalkemist/DeepLearningForAudioWithPython/tree/master/16-%20How%20to%20implement%20a%20CNN%20for%20music%20genre%20classification/code and
 #https://www.kaggle.com/msripooja/steps-to-convert-audio-clip-to-spectrogram and 
@@ -41,18 +44,18 @@ def prep_data(test_size, data_path):
     return X_train, X_test, Y_train, Y_test
 
 ###
-def train_model(input_shape):
+def train_model(input_shape, trainX, trainY, testX, testY, epochs=100, batch_size=32, layer_sizes=[512, 256, 64], dropout_rate=0.3):
     print("Training...")
     
+
     #Defines the model.
     model = keras.Sequential()
 
     model.add(keras.layers.Flatten(input_shape=input_shape))
 
-    # Dense training Layers
-    model.add(keras.layers.Dense(256, activation='relu'))
-    model.add(keras.layers.Dense(128, activation='relu'))
-    model.add(keras.layers.Dense(64, activation='relu'))
+    for i in range(layer_sizes):
+        model.add(keras.layers.Dense(layer_sizes[i], activation='relu', kernel_regularizer=keras.regularizers.l2(0.001)))
+        model.add(keras.layers.Dropout(dropout_rate))
 
     # out layer
     model.add(keras.layers.Dense(10, activation='softmax'))
@@ -64,7 +67,11 @@ def train_model(input_shape):
     #Compiles the model
     model.compile(optimizer=opt, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
+    model.fit(trainX, trainY, epochs=epochs, batch_size=batch_size, validation_data=(testX, testY))
+
     return model
+
+
 
 def predict(model, x_data, y_data=None):
     print("Predicting...")
@@ -80,12 +87,16 @@ D_PATH = 'preProcessedData/mfcc_data.json'
 if __name__ == "__main__":
 
     # get train, validation, test splits
-    X_train, X_test, y_train, y_test = prep_data(0.25, D_PATH)
+    X_train, X_test, y_train, y_test = prep_data(0.3, D_PATH)
 
     # create network
     input_shape = (X_train.shape[1], X_train.shape[2])
-    model = train_model(input_shape)
 
-    model.fit(X_train, y_train, epochs=5000, batch_size=100, validation_data=(X_test, y_test))
+    epochs = 100
+    batch_size = 40
+    layer_sizes = [512, 256, 128]
 
-    model.save_weights("models/model25612864epoch5000batch100")
+    model = train_model(input_shape, X_train, y_train, X_test, y_test, epochs=epochs, batch_size=batch_size, layer_sizes=layer_sizes)
+
+    model.save_weights("models/model" + str(layer_sizes[0]) + str(layer_sizes[1]) + str(layer_sizes[2]) + "epoch" + str(epochs) + "batch" + str(batch_size))
+
