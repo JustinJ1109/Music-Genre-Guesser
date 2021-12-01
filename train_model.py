@@ -64,7 +64,7 @@ def train_model(input_shape, trainX, trainY, testX, testY):
     #Compiles the model
     model.compile(optimizer=opt, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    model.fit(trainX, trainY, epochs=3000, batch_size=100, validation_data=(testX, testY))
+    model.fit(trainX, trainY, epochs=5000, batch_size=100, validation_data=(testX, testY))
 
     return model
 
@@ -88,4 +88,4 @@ if __name__ == "__main__":
     input_shape = (X_train.shape[1], X_train.shape[2])
     model = train_model(input_shape, X_train, y_train, X_test, y_test)
 
-    model.save_weights("models/model25612864epoch3000batch100")
+    model.save_weights("models/model25612864epoch5000batch100")
