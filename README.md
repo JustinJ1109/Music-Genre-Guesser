@@ -9,16 +9,16 @@ This model uses the GTZAN Dataset found [here](https://www.kaggle.com/andradaolt
 It includes 100 30 second royalty-free sound files from 10 different genres pre-classified for use as well as respective spectrograms for each song (unused).  
 
 The 10 genres included in training are:  
--blues  
--classical  
--country  
--disco  
--hiphop  
--jazz  
--metal  
--pop  
--reggae  
--rock  
+- blues  
+- classical  
+- country  
+- disco  
+- hiphop  
+- jazz  
+- metal  
+- pop  
+- reggae  
+- rock  
   
 ##How to Install  
 Clone this repo  
