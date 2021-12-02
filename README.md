@@ -20,7 +20,7 @@ The 10 genres included in training are:
 - reggae  
 - rock  
   
-## How to Install  
+# How to Install  
 Clone this repo  
   
 Once cloned, using python3, run ```pip install -r ./requirements.txt``` to install all dependencies  
