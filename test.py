@@ -12,9 +12,10 @@ SAMPLE_RATE = 22050
 TRACK_DURATION = 30 # measured in seconds
 SAMPLES_PER_TRACK = SAMPLE_RATE * TRACK_DURATION
 
-MODEL_PATH = "saved_models/model-25612864e200b100ln3"
+WAV_PATH = "test_music/Kiss_From_A_Rose.wav"
+MODEL_PATH = "saved_models/model-512-256-64-e200b32ln3t25.0"
 
-model = load_model("saved_models/model-25612864e1000b100ln3t25.0")
+model = load_model(MODEL_PATH)
 
 snippet_predictions = [0 for i in range(10)]
 
@@ -22,15 +23,15 @@ samples_per_segment = int(SAMPLES_PER_TRACK / 10)
 num_mfcc_vectors_per_segment = math.ceil(samples_per_segment / 512)
 
 #Trims track to 30 seconds.
-if (math.floor(librosa.get_duration(filename='test.wav')) > 30):
-    sampleRate, waveData = wavfile.read("test.wav")
+if (math.floor(librosa.get_duration(filename=WAV_PATH)) > 30):
+    sampleRate, waveData = wavfile.read(WAV_PATH)
     startSample = 0
     endSample = int(30 * sampleRate)
-    wavfile.write("test.wav", sampleRate, waveData[startSample:endSample])
+    wavfile.write(WAV_PATH, sampleRate, waveData[startSample:endSample])
 
 for i in range(10):
     #Grabs a 3 second sample from the 30 second sample
-    sampleRate, waveData = wavfile.read("test.wav")
+    sampleRate, waveData = wavfile.read(WAV_PATH)
     startSample = int(3 * i * sampleRate)
     endSample = int(3 * (i+1) * sampleRate)
     wavfile.write("snippet.wav", sampleRate, waveData[startSample:endSample])

@@ -73,10 +73,10 @@ def predict(model, x_data, y_data=None):
     return prediction
 
 D_PATH = 'preProcessedData/mfcc_data.json'
+
 if __name__ == "__main__":
 
-
-    MODEL_SAVE_PATH = "saved_models/"
+    MODEL_SAVE_PATH = "saved_models/model-25612864e1000b100ln3t25.0"
 
     test_size = 0.25
 
