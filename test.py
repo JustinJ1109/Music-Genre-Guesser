@@ -12,7 +12,7 @@ SAMPLE_RATE = 22050
 TRACK_DURATION = 30 # measured in seconds
 SAMPLES_PER_TRACK = SAMPLE_RATE * TRACK_DURATION
 
-WAV_PATH = "test_music/Kiss_From_A_Rose.wav"
+WAV_PATH = "test_music/get_off_my_dick.wav"
 MODEL_PATH = "saved_models/model-512-256-64-e200b32ln3t25.0"
 
 model = load_model(MODEL_PATH)
