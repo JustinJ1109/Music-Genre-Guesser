@@ -34,7 +34,7 @@ run ```ng serve``` in the "GenreGuesser" directory to load up the website
 Finally, run ```server.py```  
   
 ### Once the web app is loaded,  
-Upload any sound file in **.wav format** (must convert), click upload. Then go back a page and refresh to see the results.   
+Upload any sound file in **.wav format** (must convert) and **30 seconds or longer**, then click upload. Then go back a page and refresh to see the results.   
   
 ## Generating the Data  
 The MFCC data was too large to upload to git, you can expect about ~650MB of data generated within a JSON.  
@@ -42,7 +42,7 @@ To generate, run ```preProcess.py```, This should generate all of the data into 
   
 ## Training the Model  
 The model is contained within `train_model.py` and can be trained simply by running the script. Parameters are at the bottom of the file for tweaking if desired  
-All models are saved under "./saved_models/"  
+All models are saved under "./saved_models/". 
   
 ## Predicting on a song    
 `test.py` contains everything needed to generate an output.  
