@@ -31,6 +31,7 @@ Install Angular in terminal using
 Then, [install Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)  
   
 run ```ng serve``` in the "GenreGuesser" directory to load up the website  
+
 Finally, run ```server.py```  
   
 ### Once the web app is loaded,  
