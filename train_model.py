@@ -87,9 +87,9 @@ if __name__ == "__main__":
     input_shape = (X_train.shape[1], X_train.shape[2])
 
     #model25612864epoch5000batch100
-    epochs = 1000
-    batch_size = 100
-    layer_sizes = [256, 128, 64]
+    epochs = 200
+    batch_size = 32
+    layer_sizes = [512, 256, 64]
     dropout_rate = 0.3
 
     model = train_model(input_shape, X_train, y_train, X_test, y_test, epochs=epochs, batch_size=batch_size, layer_sizes=layer_sizes, dropout_rate=dropout_rate)

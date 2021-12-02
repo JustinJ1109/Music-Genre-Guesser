@@ -10,24 +10,22 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-UPLOAD_FOLDER = './uploads'
+UPLOAD_FOLDER = 'uploads/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    file: File = None
     if request.method == 'POST':
         file = request.files['file']
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
         return "File upload successful! Please go back and refresh."
 
     else :
-        print("reaching else")
         if(os.listdir(UPLOAD_FOLDER)) != 0:
-            print(file)   
-            genre, percentage = t.predict(file)
-            print("ran python script")
+            file = os.listdir(UPLOAD_FOLDER)[0]
+            genre, percentage = t.predict(UPLOAD_FOLDER + file)
+            os.remove(UPLOAD_FOLDER + file)
             predictions = {
             "data": [
             {
