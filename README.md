@@ -33,7 +33,7 @@ Then, [install Node.js and npm](https://docs.npmjs.com/downloading-and-installin
 run ```ng serve``` in the "GenreGuesser" directory to load up the website  
 Finally, run ```server.py```  
   
-#### Once the web app is loaded,  
+### Once the web app is loaded,  
 Upload any sound file in **.wav format** (must convert), click upload. Then go back a page and refresh to see the results.   
   
 ## Generating the Data  
