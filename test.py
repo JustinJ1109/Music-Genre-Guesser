@@ -1,7 +1,7 @@
 from keras.saving.save import load_model
 import librosa
 from scipy.io import wavfile
-from tensorflow.python.keras.backend import log, switch
+from tensorflow.python.keras.backend import switch
 import train_model as tm
 import tensorflow.keras as keras
 from keras.models import load_model
@@ -14,7 +14,7 @@ SAMPLES_PER_TRACK = SAMPLE_RATE * TRACK_DURATION
 
 MODEL_PATH = "saved_models/model-25612864e200b100ln3"
 
-model = load_model(MODEL_PATH)
+model = load_model("saved_models/model-25612864e1000b100ln3t25.0")
 
 snippet_predictions = [0 for i in range(10)]
 
