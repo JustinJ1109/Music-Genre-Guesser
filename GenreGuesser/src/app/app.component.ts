@@ -109,17 +109,5 @@ export class AppComponent implements OnInit{
   onSubmit() {
     this.submitted = true;
  }
-
-
-  onButtonClick() {
-    console.log(this.files[0]);
-    this.rs.sendImage(this.files[0]);
-    //let audio = new Audio();
-    //audio.src = this.files[0];
-    //audio.load();
-    //audio.play();
-    
-
-  }
 }
 
