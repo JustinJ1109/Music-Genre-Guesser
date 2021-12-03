@@ -1,9 +1,7 @@
 from keras.saving.save import load_model
 import librosa
 from scipy.io import wavfile
-from tensorflow.python.keras.backend import switch
 import train_model as tm
-import tensorflow.keras as keras
 from keras.models import load_model
 import numpy as np
 import math
@@ -21,6 +19,13 @@ samples_per_segment = int(SAMPLES_PER_TRACK / 10)
 num_mfcc_vectors_per_segment = math.ceil(samples_per_segment / 512)
 
 def predict(file):
+    """Predicts the genres of the song at the file path
+    
+    :file (str): path to .wav file to predict
+    :return topThree []: top three predictions guessed
+    :return topThreePercentage []: top three percentages that the algorithm guessed for each prediction
+    """
+    
     snippet_predictions = [0 for i in range(10)]
         #Trims track to 30 seconds.
     if (math.floor(librosa.get_duration(filename=file)) > 30):

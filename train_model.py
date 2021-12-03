@@ -76,7 +76,7 @@ D_PATH = 'preProcessedData/mfcc_data.json'
 
 if __name__ == "__main__":
 
-    MODEL_SAVE_PATH = "saved_models/model-25612864e1000b100ln3t25.0"
+    MODEL_SAVE_PATH = "saved_models/"
 
     test_size = 0.25
 
