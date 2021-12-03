@@ -11,7 +11,7 @@ TRACK_DURATION = 30 # measured in seconds
 SAMPLES_PER_TRACK = SAMPLE_RATE * TRACK_DURATION
 
 WAV_PATH = "test_music/pachelbel.wav"
-MODEL_PATH = "saved_models/model-51225664e200b32ln3t25.0"
+MODEL_PATH = "saved_models/model-512-256-64-e200b32ln3t25.0"
 
 model = load_model(MODEL_PATH)
 
@@ -87,6 +87,9 @@ def predict(file):
 
     return topThree, topThreePercent
 
-    
+################################################
+# IF RUNNING WITHOUT UI, UNCOMMENT BELOW TO RUN
+################################################
+#predict(WAV_PATH)
 
 

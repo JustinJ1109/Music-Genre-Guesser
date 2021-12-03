@@ -1,7 +1,7 @@
 import json
 import numpy as np
 from sklearn.model_selection import train_test_split
-import keras
+import tensorflow.keras as keras
 from tensorflow.keras import layers
 from tensorflow.python.keras.backend import dropout
 
@@ -49,7 +49,6 @@ def prep_data(test_size, data_path):
     print("Splitting test data")
     X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size=test_size)
     return X_train, X_test, Y_train, Y_test
-
 
 def train_model(input_shape, trainX, trainY, testX, testY, epochs=100, batch_size=32, layer_sizes=[512, 256, 64], dropout_rate=0.3):
     """
