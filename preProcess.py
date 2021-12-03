@@ -4,11 +4,15 @@ import math
 import librosa
 
 DATASET_PATH = "Data/genres_original/"
-JSON_PATH = "preProcessedData/mfcc_data.json"
+DIRECTORY_PATH = "preProcessedData2/"
+JSON_PATH = DIRECTORY_PATH + "mfcc_data.json"
 SAMPLE_RATE = 22050
 TRACK_DURATION = 30 # measured in seconds
 SAMPLES_PER_TRACK = SAMPLE_RATE * TRACK_DURATION
 
+
+# https://github.com/musikalkemist/DeepLearningForAudioWithPython/blob/master/12-%20Music%20genre%20classification:%20Preparing%20the%20dataset/code/extract_data.py
+# referenced
 
 def save_mfcc(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_length=512, num_segments=5):
     """Extracts MFCCs from music dataset and saves them into a json file along witgh genre labels.
@@ -72,4 +76,8 @@ def save_mfcc(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_length=512, 
         
         
 if __name__ == "__main__":
+
+    if not os.path.exists(DIRECTORY_PATH):
+        os.mkdir(DIRECTORY_PATH)
+
     save_mfcc(DATASET_PATH, JSON_PATH, num_segments=10)
