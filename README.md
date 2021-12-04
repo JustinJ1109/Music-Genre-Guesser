@@ -23,7 +23,7 @@ The 10 genres included in training are:
 # How to Install  
 Clone this repo  
   
-Once cloned, using python3, run ```pip install -r ./requirements.txt``` to install all dependencies  
+Once cloned, run ```pip install -r ./requirements.txt``` to install all dependencies  
   
 ### Using The Web App  
 Install Angular in terminal using  
