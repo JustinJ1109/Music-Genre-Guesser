@@ -46,6 +46,7 @@ The model is contained within `train_model.py` and can be trained simply by runn
 All models are saved under "./saved_models/". 
   
 ## Predicting on a song    
-`test.py` contains everything needed to generate an output.
-Simply place a song into the `./test_music/` folder and then input the path of that file in the `WAV_FILE` variable in the script and run it.
+If you are not using the web app, `test.py` contains everything needed to generate an output.  
+Simply place a song into the `./test_music/` folder and then input the path of that file in the `WAV_FILE` variable in the script and run it.  
+Otherwise upload a song where prompted and follow the instructions
 
